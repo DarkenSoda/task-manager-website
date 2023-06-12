@@ -38,36 +38,34 @@ label {
 }
 
 .list {
-	height: auto;
 	display: flex;
 	flex-direction: column;
 	margin: 50px;
+}
+.list label {
+	width: 130px;
 }
 .slider {
 	overflow-y: scroll;
 	min-height: 55vh;
 	max-height: 55vh;
-	min-width: 50vw;
-	display: flex;
-	justify-content: center;
 	background-color: #caceee;
 	border-radius: 4px;
-	border: 1.5px solid;
-	border-color: #7a83e7;
+	border: 1.5px solid #7a83e7;
 }
-
-.task {
-	width: 500px;
-	height: 50px;
-	margin: 15px;
+.slider-content {
+	min-width: 50vw;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+}
+.task {
+	margin: 20px;
 }
 .task label {
-	margin-right: auto;
-	width: 80px;
-	height: 20px;
+	margin-left: 70px;
+	margin-right: 70px;
+	width: 150px;
 	text-align: center;
 	white-space: nowrap;
 	overflow: hidden;
@@ -75,7 +73,7 @@ label {
 	transition: width 0.5s;
 }
 .task label:hover {
-	width: 80px;
+	width: 150px;
 	background-color: #72d5ee;
 	border-radius: 4px;
 }
@@ -117,8 +115,9 @@ label {
 .DeleteButton:hover {
 	background-color: #881c1c;
 }
+
 button {
-	margin-left: 20px;
+	margin-left: 30px;
 	display: inline-block;
 	padding: 10px 20px;
 	color: white;
@@ -127,10 +126,28 @@ button {
 	border: none;
 	cursor: pointer;
 	font-size: 16px;
+	font-family: cursive;
 	transition-duration: 0.4s;
-	
 }
 label {
 	color: #10154c;
+	cursor: text;
 	display: inline-block;
+}
+
+input {
+	padding: 10px;
+	border: 1px solid #ccc;
+	color: #10154c;
+	border-radius: 4px;
+	font-size: 16px;
+	font-family: cursive;
+	outline: none;
+	transition: border-color 0.3s ease-in-out;
+}
+input:focus {
+	border-color: #10154c;
+}
+input::placeholder {
+	color: #8891e6;
 }

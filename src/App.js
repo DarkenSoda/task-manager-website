@@ -74,41 +74,49 @@ function App() {
 	return (
 		<div className="App">
 			<div className="taskArea">
-				<label className="header" for="textInput">
-					Add Your Task Here!
-				</label>
-				<div className="addTask">
-					<input id="textInput" onChange={handleChange} />
-					{!isEditing && (
-						<button className="PrimaryButton" onClick={addTask}>
-							Add Task
-						</button>
-					)}
-					{isEditing && (
-						<>
-							<button
-								className="SecondaryButton"
-								onClick={editTaskID}
-							>
-								Confirm Edit
+				<div>
+					<label className="header" for="textInput">
+						{isEditing ? (
+							<>Edit Your Task!</>
+						) : (
+							<>Add Your Task Here!</>
+						)}
+					</label>
+					<div className="addTask">
+						<input
+							id="textInput"
+							placeholder="My Task"
+							onChange={handleChange}
+						/>
+						{!isEditing && (
+							<button className="PrimaryButton" onClick={addTask}>
+								Add Task
 							</button>
-							<button
-								className="DeleteButton"
-								onClick={cancelEditTask}
-							>
-								Cancel
-							</button>
-						</>
-					)}
+						)}
+						{isEditing && (
+							<>
+								<button
+									className="SecondaryButton"
+									onClick={editTaskID}
+								>
+									Confirm Edit
+								</button>
+								<button
+									className="DeleteButton"
+									onClick={cancelEditTask}
+								>
+									Cancel
+								</button>
+							</>
+						)}
+					</div>
 				</div>
 			</div>
 
 			<div className="list">
-				<label className="header" for="textInput">
-					Your Tasks
-				</label>
+				<label className="header">Your Tasks</label>
 				<div className="slider">
-					<ul className="slider-content">
+					<ol className="slider-content">
 						{taskList.map((task) => {
 							return (
 								<Task
@@ -121,7 +129,7 @@ function App() {
 								/>
 							);
 						})}
-					</ul>
+					</ol>
 				</div>
 			</div>
 		</div>
