@@ -73,34 +73,56 @@ function App() {
 
 	return (
 		<div className="App">
-			<div className="addTask">
-				<input id="textInput" onChange={handleChange} />
-				{!isEditing && (
-					<input type="submit" value="Add Task" onClick={addTask} />
-				)}
-				{isEditing && (
-					<>
-						<button onClick={editTaskID}>Confirm Edit</button>
-						<button onClick={cancelEditTask}>Cancel</button>
-					</>
-				)}
+			<div className="taskArea">
+				<label className="header" for="textInput">
+					Add Your Task Here!
+				</label>
+				<div className="addTask">
+					<input id="textInput" onChange={handleChange} />
+					{!isEditing && (
+						<button className="PrimaryButton" onClick={addTask}>
+							Add Task
+						</button>
+					)}
+					{isEditing && (
+						<>
+							<button
+								className="SecondaryButton"
+								onClick={editTaskID}
+							>
+								Confirm Edit
+							</button>
+							<button
+								className="DeleteButton"
+								onClick={cancelEditTask}
+							>
+								Cancel
+							</button>
+						</>
+					)}
+				</div>
 			</div>
 
 			<div className="list">
-				<ul>
-					{taskList.map((task) => {
-						return (
-							<Task
-								id={task.id}
-								taskName={task.taskName}
-								completed={task.completed}
-								completeTask={completeTask}
-								editTask={editTask}
-								deleteTask={deleteTask}
-							/>
-						);
-					})}
-				</ul>
+				<label className="header" for="textInput">
+					Your Tasks
+				</label>
+				<div className="slider">
+					<ul className="slider-content">
+						{taskList.map((task) => {
+							return (
+								<Task
+									id={task.id}
+									taskName={task.taskName}
+									completed={task.completed}
+									completeTask={completeTask}
+									editTask={editTask}
+									deleteTask={deleteTask}
+								/>
+							);
+						})}
+					</ul>
+				</div>
 			</div>
 		</div>
 	);
