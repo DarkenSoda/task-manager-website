@@ -103,6 +103,9 @@ label {
 .DeleteButton {
 	background-color: rgb(196, 53, 53);
 }
+.UncompleteButton{
+	background-color: #72d5ee;
+}
 .Accent {
 	background-color: #72d5ee;
 }
