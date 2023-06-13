@@ -7,6 +7,7 @@ function App() {
 	const [newTask, setNewTask] = useState("");
 	const [isEditing, setIsEditing] = useState(false);
 	const [currentTaskID, setCurrentTaskID] = useState(null);
+	const [index, setIndex] = useState(1);
 
 	const sortTaskList = () => {
 		setList((prevlist) => {
@@ -22,11 +23,11 @@ function App() {
 		if (newTask === "") return;
 
 		const task = {
-			id: findMaxID() + 1,
+			id: index,
 			taskName: newTask,
 			completed: false,
 		};
-
+		setIndex((previndex) => previndex + 1);
 		setList([...taskList, task]);
 		sortTaskList();
 
