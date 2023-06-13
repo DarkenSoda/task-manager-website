@@ -9,6 +9,7 @@ function App() {
 	const [currentTaskID, setCurrentTaskID] = useState(null);
 
 	const addTask = () => {
+		/*
 		if (newTask === "") return;
 
 		const task = {
@@ -23,6 +24,28 @@ function App() {
 
 		document.getElementById("textInput").value = "";
 		setNewTask("");
+		*/
+		if (newTask === "") return;
+
+		const task = {
+			id:
+				taskList.length === 0
+					? 1
+					: taskList[taskList.length - 1].id + 1,
+			taskName: newTask,
+			completed: false,
+		};
+
+		setList((prevlist) => {
+			const completedtasks = prevlist.filter((task) => task.completed);
+			const incompletetasks = prevlist.filter((task) => !task.completed);
+
+			const updatedtasklist = [...incompletetasks, task, ...completedtasks];
+			return updatedtasklist;
+		});
+		document.getElementById("textInput").value = "";
+		setNewTask("");
+
 	};
 
 	const handleChange = (event) => {
@@ -35,7 +58,22 @@ function App() {
 				return task.id === taskID ? { ...task, completed: true } : task;
 			})
 		);
+		ToLast(taskID);
 	};
+
+	const ToLast = (taskId) => {
+		  setList((prevlist) => {
+			const updatedlist = [...prevlist];
+			const completedtaskindex = updatedlist.findIndex((task) => task.id === taskId);
+		
+			if (completedtaskindex !== -1) {
+			  const completedtask = updatedlist.splice(completedtaskindex, 1)[0];
+			  updatedlist.push(completedtask);
+			}
+		
+			return updatedlist;
+		  });
+	}
 
 	const editTask = (taskID) => {
 		setIsEditing(true);
@@ -44,6 +82,8 @@ function App() {
 			(task) => task.id === taskID
 		)[0].taskName;
 		setNewTask(document.getElementById("textInput").value);
+
+		
 	};
 
 	const editTaskID = () => {
@@ -67,6 +107,16 @@ function App() {
 		setNewTask("");
 	};
 
+	const uncompleteTask = ()=>{
+		setList(
+			taskList.map((task) => {
+				return task.id === currentTaskID
+					? { ...task, completed:false}
+					: task;
+			})
+		);
+		cancelEditTask();
+	}
 	const deleteTask = (taskID) => {
 		setList(taskList.filter((task) => task.id !== taskID));
 	};
@@ -107,6 +157,12 @@ function App() {
 								>
 									Cancel
 								</button>
+								<button
+									className="UncompleteButton"
+									onClick={uncompleteTask}
+									>
+										Uncomplete
+									</button>
 							</>
 						)}
 					</div>

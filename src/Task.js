@@ -1,4 +1,5 @@
 export const Task = (props) => {
+	
 	return (
 		<li className="task">
 			<label style={{ color: props.completed && "#45b878" }}>
