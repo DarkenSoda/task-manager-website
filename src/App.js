@@ -7,19 +7,16 @@ function App() {
 	const [newTask, setNewTask] = useState("");
 	const [isEditing, setIsEditing] = useState(false);
 	const [currentTaskID, setCurrentTaskID] = useState(null);
-
+	const [index, setIndex] = useState(1);
 	const addTask = () => {
 		if (newTask === "") return;
 
 		const task = {
-			id:
-				taskList.length === 0
-					? 1
-					: taskList[taskList.length - 1].id + 1,
+			id: index,
 			taskName: newTask,
 			completed: false,
 		};
-
+		setIndex((previndex) => previndex + 1);
 		setList((prevlist) => {
 			const completedtasks = prevlist.filter((task) => task.completed);
 			const incompletetasks = prevlist.filter((task) => !task.completed);
