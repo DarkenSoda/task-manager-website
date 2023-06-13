@@ -8,28 +8,30 @@ function App() {
 	const [isEditing, setIsEditing] = useState(false);
 	const [currentTaskID, setCurrentTaskID] = useState(null);
 
-	const addTask = () => {
-		if (newTask === "") return;
-
-		const task = {
-			id:
-				taskList.length === 0
-					? 1
-					: taskList[taskList.length - 1].id + 1,
-			taskName: newTask,
-			completed: false,
-		};
-
+	const sortTaskList = () => {
 		setList((prevlist) => {
 			const completedtasks = prevlist.filter((task) => task.completed);
 			const incompletetasks = prevlist.filter((task) => !task.completed);
 
-			const updatedtasklist = [...incompletetasks, task, ...completedtasks];
+			const updatedtasklist = [...incompletetasks, ...completedtasks];
 			return updatedtasklist;
 		});
+	}
+
+	const addTask = () => {
+		if (newTask === "") return;
+
+		const task = {
+			id: findMaxID() + 1,
+			taskName: newTask,
+			completed: false,
+		};
+
+		setList([...taskList, task]);
+		sortTaskList();
+
 		document.getElementById("textInput").value = "";
 		setNewTask("");
-
 	};
 
 	const handleChange = (event) => {
@@ -46,18 +48,20 @@ function App() {
 	};
 
 	const ToLast = (taskId) => {
-		  setList((prevlist) => {
+		setList((prevlist) => {
 			const updatedlist = [...prevlist];
-			const completedtaskindex = updatedlist.findIndex((task) => task.id === taskId);
-		
+			const completedtaskindex = updatedlist.findIndex(
+				(task) => task.id === taskId
+			);
+
 			if (completedtaskindex !== -1) {
-			  const completedtask = updatedlist.splice(completedtaskindex, 1)[0];
-			  updatedlist.push(completedtask);
+			  	const completedtask = updatedlist.splice(completedtaskindex, 1)[0];
+			  	updatedlist.push(completedtask);
 			}
-		
+
 			return updatedlist;
-		  });
-	}
+		});
+	};
 
 	const editTask = (taskID) => {
 		setIsEditing(true);
@@ -66,8 +70,6 @@ function App() {
 			(task) => task.id === taskID
 		)[0].taskName;
 		setNewTask(document.getElementById("textInput").value);
-
-		
 	};
 
 	const editTaskID = () => {
@@ -91,16 +93,18 @@ function App() {
 		setNewTask("");
 	};
 
-	const uncompleteTask = ()=>{
+	const uncompleteTask = () => {
 		setList(
 			taskList.map((task) => {
 				return task.id === currentTaskID
-					? { ...task, completed:false}
+					? { ...task, completed: false }
 					: task;
 			})
 		);
+		sortTaskList();
 		cancelEditTask();
-	}
+	};
+
 	const deleteTask = (taskID) => {
 		setList(taskList.filter((task) => task.id !== taskID));
 	};
@@ -144,9 +148,9 @@ function App() {
 								<button
 									className="UncompleteButton"
 									onClick={uncompleteTask}
-									>
-										Incomplete
-									</button>
+								>
+									Incomplete
+								</button>
 							</>
 						)}
 					</div>
