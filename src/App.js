@@ -145,7 +145,7 @@ function App() {
 									className="UncompleteButton"
 									onClick={uncompleteTask}
 									>
-										Uncomplete
+										Incomplete
 									</button>
 							</>
 						)}
