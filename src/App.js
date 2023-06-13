@@ -9,22 +9,6 @@ function App() {
 	const [currentTaskID, setCurrentTaskID] = useState(null);
 
 	const addTask = () => {
-		/*
-		if (newTask === "") return;
-
-		const task = {
-			id:
-				taskList.length === 0
-					? 1
-					: taskList[taskList.length - 1].id + 1,
-			taskName: newTask,
-			completed: false,
-		};
-		setList([...taskList, task]);
-
-		document.getElementById("textInput").value = "";
-		setNewTask("");
-		*/
 		if (newTask === "") return;
 
 		const task = {
